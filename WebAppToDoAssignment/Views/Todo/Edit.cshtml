@@ -1,0 +1,30 @@
+﻿@using WebAppToDoAssignment.Models;
+@model Todo
+
+<h2>Edit Todo</h2>
+<form asp-action="Edit" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <div class="form-group">
+        <label>Description</label>
+        <input type="text" name="description" class="form-control" value="@Model.Description" />
+    </div>
+    <div class="form-group">
+        <label>Done</label>
+        <select name="done" class="form-control">
+            <option value="true">@(Model.Done ? "selected" : "")>Done</option>
+            <option value="false">@(!Model.Done ? "selected" : "")>Not Done</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Assignee</label>
+        <select name="assigneeId" class="form-control">
+            @foreach (var person in ViewBag.People)
+            {
+                <option value="@person.Id">@(Model.Assignee.Id == person.Id ? "selected" : "")>@person.FirstName @person.LastName</option>
+            }
+        </select>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>

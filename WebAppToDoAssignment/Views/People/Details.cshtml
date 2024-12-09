@@ -1,0 +1,30 @@
+﻿@using WebAppToDoAssignment.Models
+@model Person
+
+@{
+    ViewData["Title"] = "Person Details";
+}
+
+<h1>Person Details</h1>
+
+<div>
+    <h4>Person</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            First Name
+        </dt>
+        <dd class="col-sm-10">
+            @Model.FirstName
+        </dd>
+        <dt class="col-sm-2">
+            Last Name
+        </dt>
+        <dd class="col-sm-10">
+            @Model.LastName
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

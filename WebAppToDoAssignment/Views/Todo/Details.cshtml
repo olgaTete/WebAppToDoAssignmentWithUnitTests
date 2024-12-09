@@ -1,0 +1,10 @@
+﻿@model WebAppToDoAssignment.Models.Todo
+
+
+<h2>Todo Details</h2>
+<div>
+    <h4>Description: @Model.Description</h4>
+    <h4>Done: @(Model.Done ? "Done" : "Not Done")</h4>
+    <h4>Assignee: @Model.Assignee.Id @Model.Assignee.FirstName @Model.Assignee.LastName</h4>
+</div>
+<a href="/Todo/Index">Back to List</a>

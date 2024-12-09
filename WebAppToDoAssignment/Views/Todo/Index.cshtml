@@ -1,0 +1,60 @@
+﻿@using WebAppToDoAssignment.Models
+@model IEnumerable<Todo>
+
+
+<h2>Todo List</h2>
+
+<!-- Filter Form for Done Status -->
+<div class="col-md-4">
+    <form asp-action="ByDoneStatus" method="get" class="form-inline">
+        <label for="doneStatus">Filter by Status:</label>
+        <select id="doneStatus" name="doneStatus" class="form-control">
+            <option value="">All</option> <!-- Show all tasks -->
+            <option value="true">Done</option>
+            <option value="false">Not Done</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </form>
+</div>
+
+<!-- Filter Form for Assignee -->
+<div class="col-md-4">
+    <form asp-action="ByAssignee" method="get" class="form-inline">
+        <label for="assignee">Filter by Assignee:</label>
+        <select id="assignee" name="assigneeId" class="form-control">
+            <option value="">All Assignees</option> <!-- Option for selecting all -->
+            @foreach (var person in ViewBag.People)
+            {
+                <option value="@person.Id">@person.FirstName @person.LastName</option>
+            }
+        </select>
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </form>
+</div>
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>Done</th>
+            <th>Assignee</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Description</td>
+                <td>@(item.Done ? "Done" : "Not Done")</td>
+                <td>@item.Assignee.FirstName @item.Assignee.LastName</td>
+                <td>
+                    <a href="/Todo/Details/@item.Id">Details</a> |
+                    <a href="/Todo/Edit/@item.Id">Edit</a> |
+                    <a href="/Todo/Delete/@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Todo/Create">Create New</a>
